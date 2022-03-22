@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 public class Solution {
@@ -16,25 +18,29 @@ public class Solution {
 			System.exit(0);
 		}else {
 			
-			int numberOfOccurences = 0;		
-			int currentNumber = 0;
-			
-			for(int index = 0;index < data.length;index++) {
-				currentNumber = data[index];
-				for(int index2 = 1; index2 < data.length;index2++) {
-					if(currentNumber == data[index2]) {
-						numberOfOccurences++;
-						if(numberOfOccurences > n) {
-							for(int index3 = 0;index3 < data.length; index3++) {
-								if(data[index3] == currentNumber) {
-									data = ArrayUtils.remove(data, index3);
-								}
+			if(n == 0) {
+				
+				data = new int[0];
+				
+			}else {
+				int numberOfOccurences = 0;		
+				int currentNumber = 0;
+				
+				for(int index = 0;index < data.length;index++) {
+					currentNumber = data[index];
+					for(int index2 = 0; index2 < data.length;index2++) {
+						if(currentNumber == data[index2]) {
+							numberOfOccurences++;
+							if(numberOfOccurences > n) {
+								int tempNum = currentNumber;
+								data = Arrays.stream(data).filter(x -> x != tempNum).toArray();
 							}
 						}
 					}
+					numberOfOccurences = 0;
 				}
-				numberOfOccurences = 0;
 			}
+			
 		}
 		
 		
